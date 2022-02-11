@@ -20,6 +20,7 @@ jobs:
           echo "Image $IMAGE doesn't exist."
           exit 1
         fi
+
   image-scan:
     runs-on: ubuntu-latest
     steps:
@@ -27,3 +28,13 @@ jobs:
       uses: Azure/container-scan@v0.1
       with:
         image-name: ${{ env.IMAGE }}
+
+  readme-check:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Run mdl
+      uses: actionshub/markdownlint@main
+      with:
+        path: README.md
