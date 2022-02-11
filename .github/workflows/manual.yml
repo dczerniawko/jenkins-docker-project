@@ -12,3 +12,7 @@ jobs:
     steps:
     - name: Check if image exists in Docker Hub
       run: docker manifest inspect $IMAGE > /dev/null ; echo $?
+    - name: Container image scan
+      uses: Azure/container-scan@v0.1
+      with:
+        image-name: ${{ env.IMAGE }}
