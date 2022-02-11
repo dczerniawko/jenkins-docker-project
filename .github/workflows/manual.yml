@@ -1,0 +1,14 @@
+name: Manual workflow
+
+on:
+  workflow_dispatch
+
+env:
+  IMAGE: jenkins/jenkins:lts
+
+jobs:
+  image-exists:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check if image exists in Docker Hub
+      run: docker manifest inspect $IMAGE > /dev/null ; echo $?
