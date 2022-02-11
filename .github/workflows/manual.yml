@@ -11,7 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Check if image exists in Docker Hub
-      run: docker manifest inspect $IMAGE > /dev/null ; echo $?
+      run: |
+        if docker manifest inspect $IMAGE > /dev/null
+        then
+          echo "Image $IMAGE exists."
+          exit 0
+        else
+          echo "Image $IMAGE doesn't exist."
+          exit 1
+        fi
     - name: Container image scan
       uses: Azure/container-scan@v0.1
       with:
