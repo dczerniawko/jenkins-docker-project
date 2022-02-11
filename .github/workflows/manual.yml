@@ -20,6 +20,9 @@ jobs:
           echo "Image $IMAGE doesn't exist."
           exit 1
         fi
+  image-scan:
+    runs-on: ubuntu-latest
+    steps:
     - name: Container image scan
       uses: Azure/container-scan@v0.1
       with:
